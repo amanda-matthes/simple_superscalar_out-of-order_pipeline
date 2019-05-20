@@ -1,2 +1,2 @@
 # SuperscalarPipeline
-A Superscalar, Out-of-order Pipeline based on the RISC-V ISA implemented in SystemVerilog
+A Superscalar, Out-of-order Pipeline loosely based on the RISC-V ISA implemented in SystemVerilog
