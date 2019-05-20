@@ -1,0 +1,291 @@
+# SimVision Command Script (Di Apr 09 14:45:42 CEST 2019)
+#
+# Version 15.20.s045
+#
+# You can restore this configuration with:
+#
+#      irun -access +rwc -sv -linedebug -timescale 1ns/1ns -f module_list.f -svseed random -s -input /home/amatthes/Documents/BachelorThesis/Code/ROB_tb.tcl
+#
+
+
+#
+# Preferences
+#
+preferences set toolbar-Standard-WatchWindow {
+  usual
+  shown 0
+}
+preferences set toolbar-SimControl-WatchList {
+  usual
+  position -anchor e
+}
+preferences set waveform-print-variables all
+preferences set txe-locate-add-fibers 1
+preferences set signal-type-colors {assertion #FF0000 output #FFA500 group #0099FF inout #00FFFF input #FFFF00 fiber #00EEEE errorsignal #FF0000 unknown #FFFFFF overlay #0099FF internal #00FF00 reference #FFFFFF}
+preferences set txe-navigate-search-locate 0
+preferences set txe-view-hold 0
+preferences set plugin-enable-svdatabrowser-new 1
+preferences set toolbar-SimControl-WaveWindow {
+  usual
+  position -anchor e
+}
+preferences set cursorctl-dont-show-sync-warning 1
+preferences set toolbar-Windows-WatchWindow {
+  usual
+  shown 0
+}
+preferences set verilog-colors {Su #ff0099 0 {} 1 {} HiZ #ff9900 We #00ffff Pu #9900ff Sm #00ff99 X #ff0000 StrX #ff0000 other #ffff00 Z #ff9900 Me #0000ff La #ff00ff St {}}
+preferences set toolbar-sendToIndago-WaveWindow {
+  usual
+  position -pos 1
+}
+preferences set txe-navigate-waveform-locate 1
+preferences set txe-view-hidden 0
+preferences set toolbar-Standard-Console {
+  usual
+  position -pos 1
+}
+preferences set txe-search-show-linenumbers 1
+preferences set toolbar-Search-Console {
+  usual
+  position -pos 2
+}
+preferences set plugin-enable-groupscope 0
+preferences set key-bindings {PageUp PageUp Edit>Undo Ctrl+z View>Zoom>In Alt+i View>Zoom>Next {Alt+Right arrow} PageDown PageDown ScrollDown {Down arrow} Edit>Copy Ctrl+c Edit>Select>All Ctrl+a Simulation>NextInScope F7 View>Zoom>FullY_widget y Edit>Create>Group Ctrl+g Format>Radix>Decimal Ctrl+Shift+D Edit>Ungroup Ctrl+Shift+G TopOfPage Home Edit>Create>Condition Ctrl+e {command -console SimVision {%w sidebar access designbrowser selectall}} Alt+a ScrollLeft {Left arrow} Edit>SelectAllText Alt+a Edit>TextSearchConsole Alt+s View>Zoom>FullX_widget = Windows>SendTo>Waveform Ctrl+w Simulation>Return Shift+F5 View>CallstackDown {Ctrl+Down arrow} Select>All Ctrl+a Edit>Delete Del Format>Radix>Octal Ctrl+Shift+O Edit>Cut Ctrl+x Simulation>Run F2 Edit>Create>Marker Ctrl+m View>Center Alt+c View>CallstackInWindow Ctrl+k Edit>SelectAll Ctrl+a File>OpenDatabase Ctrl+o Edit>Redo Ctrl+y Format>Radix>Binary Ctrl+Shift+B View>ExpandSequenceTime>AtCursor Alt+x ScrollUp {Up arrow} File>CloseWindow Ctrl+Shift+w ScrollRight {Right arrow} View>Zoom>FullX Alt+= Edit>Create>Bus Ctrl+b Explore>NextEdge Ctrl+\] View>Zoom>Cursor-Baseline Alt+z View>Zoom>OutX Alt+o Edit>GoToLine Ctrl+g View>Zoom>Fit Alt+= View>Zoom>OutX_widget o View>CallstackUp {Ctrl+Up arrow} View>Bookmarks>Add Ctrl+b Format>Radix>Hexadecimal Ctrl+Shift+H Edit>Search Ctrl+f Simulation>Next F6 View>ShowValues Ctrl+s View>Zoom>InX Alt+i Edit>Create>MarkerAtCursor Ctrl+Shift+M View>Zoom>Out Alt+o Edit>TextSearch Ctrl+f Format>Signed Ctrl+Shift+S Edit>Paste Ctrl+v View>Zoom>Previous {Alt+Left arrow} Control>ReinvokeSimulator Ctrl+r View>CollapseSequenceTime>AtCursor Alt+s Format>Radix>ASCII Ctrl+Shift+A View>Zoom>InX_widget i BottomOfPage End Explore>PreviousEdge {Ctrl+[} Simulation>Step F5}
+preferences set plugin-enable-interleaveandcompare 0
+preferences set plugin-enable-waveformfrequencyplot 0
+preferences set toolbar-SimControl-WatchWindow {
+  usual
+  shown 0
+}
+preferences set prompt-on-reinvoke 0
+preferences set txe-navigate-waveform-next-child 1
+preferences set toolbar-Windows-WatchList {
+  usual
+  position -pos 2
+}
+preferences set vhdl-colors {X #ff0000 0 {} L #00ffff H #00ffff U #9900ff 1 {} - {} Z #ff9900 W #ff0000}
+preferences set txe-locate-scroll-x 1
+preferences set txe-locate-scroll-y 1
+preferences set txe-locate-pop-waveform 1
+preferences set whats-new-dont-show-at-startup 1
+preferences set toolbar-TimeSearch-WatchWindow {
+  usual
+  shown 0
+}
+preferences set key-bindings {Edit>Undo Ctrl+z PageUp PageUp View>Zoom>Next {Alt+Right arrow} View>Zoom>In Alt+i PageDown PageDown Edit>Copy Ctrl+c ScrollDown {Down arrow} Edit>Create>Group Ctrl+g View>Zoom>FullY_widget y Simulation>NextInScope F7 Edit>Select>All Ctrl+a Format>Radix>Decimal Ctrl+Shift+D Edit>Ungroup Ctrl+Shift+G TopOfPage Home Edit>Create>Condition Ctrl+e {command -console SimVision {%w sidebar access designbrowser selectall}} Alt+a ScrollLeft {Left arrow} Edit>SelectAllText Alt+a Edit>TextSearchConsole Alt+s View>Zoom>FullX_widget = Windows>SendTo>Waveform Ctrl+w Simulation>Return Shift+F5 View>CallstackDown {Ctrl+Down arrow} Select>All Ctrl+a Edit>Delete Del Format>Radix>Octal Ctrl+Shift+O Edit>Cut Ctrl+x Simulation>Run F2 Edit>Create>Marker Ctrl+m View>Center Alt+c View>CallstackInWindow Ctrl+k Edit>SelectAll Ctrl+a File>OpenDatabase Ctrl+o Edit>Redo Ctrl+y Format>Radix>Binary Ctrl+Shift+B View>ExpandSequenceTime>AtCursor Alt+x ScrollUp {Up arrow} File>CloseWindow Ctrl+Shift+w ScrollRight {Right arrow} View>Zoom>FullX Alt+= Edit>Create>Bus Ctrl+b Explore>NextEdge Ctrl+\] View>Zoom>Cursor-Baseline Alt+z View>Zoom>OutX Alt+o Edit>GoToLine Ctrl+g View>Zoom>Fit Alt+= View>Zoom>OutX_widget o View>CallstackUp {Ctrl+Up arrow} View>Bookmarks>Add Ctrl+b View>ShowValues Ctrl+s Simulation>Next F6 Edit>Search Ctrl+f Format>Radix>Hexadecimal Ctrl+Shift+H Edit>Create>MarkerAtCursor Ctrl+Shift+M View>Zoom>InX Alt+i View>Zoom>Out Alt+o Edit>TextSearch Ctrl+f View>Zoom>Previous {Alt+Left arrow} Edit>Paste Ctrl+v Format>Signed Ctrl+Shift+S Control>ReinvokeSimulator Ctrl+r View>CollapseSequenceTime>AtCursor Alt+s View>Zoom>InX_widget i Format>Radix>ASCII Ctrl+Shift+A Simulation>Step F5 Explore>PreviousEdge {Ctrl+[} BottomOfPage End}
+
+#
+# Simulator
+#
+database require simulator -hints {
+	simulator "irun -access +rwc -gui -sv -linedebug -timescale 1ns/1ns -f module_list.f -svseed random -s -input ROB_tb.tcl"
+}
+#
+# Groups
+#
+catch {group new -name {Group 1} -overlay 0}
+group using {Group 1}
+group set -overlay 0
+group set -comment {}
+group clear 0 end
+
+group insert \
+    [subst  {simulator::[format {instruction_issue_tb.ii_I.instr_if2ii[15]}]} ] \
+    [subst  {simulator::[format {instruction_issue_tb.ii_I.instr_if2ii[16]}]} ] \
+    [subst  {simulator::[format {instruction_issue_tb.ii_I.instr_if2ii[17]}]} ] \
+    [subst  {simulator::[format {instruction_issue_tb.ii_I.instr_if2ii[18]}]} ] \
+    [subst  {simulator::[format {instruction_issue_tb.ii_I.instr_if2ii[19]}]} ]
+
+#
+# Mnemonic Maps
+#
+mmap new -reuse -name {Boolean as Logic} -radix %b -contents {{%c=FALSE -edgepriority 1 -shape low}
+{%c=TRUE -edgepriority 1 -shape high}}
+mmap new -reuse -name {Example Map} -radix %x -contents {{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=* -label %x -linecolor gray -shape bus}}
+mmap new -reuse -name Opcodes -radix %x -contents {{%b=0000011 -label LD}
+{%b=0100011 -label SD}
+{%b=0110011 -label ADD}
+{%b=0000000 -label NONE}}
+mmap new -reuse -name {Physical Register} -radix %x -contents {{%b=????? -label {P %x}}}
+mmap new -reuse -name {Arch Register} -radix %x -contents {{%b=????? -label {R %x}}}
+mmap new -reuse -name Busy -radix %b -contents {{%b=1 -edgepriority 1 -label BUSY -shape low}
+{%b=0 -edgepriority 1 -label FREE -shape high}}
+mmap new -reuse -name Number -radix %x -contents {{%d=? -font -*-courier-medium-r-normal--12-* -label %x -linecolor yellow -shape bus}}
+
+#
+# Design Browser windows
+#
+if {[catch {window new WatchList -name "Design Browser 3" -geometry 916x766+1954+203}] != ""} {
+    window geometry "Design Browser 3" 916x766+1954+203
+}
+window target "Design Browser 3" on
+browser using {Design Browser 3}
+browser set -scope [subst  {simulator::[format {rob_tb.rob_I}]} ]
+browser set \
+    -signalsort name
+browser yview see [subst  {simulator::[format {rob_tb.rob_I}]} ]
+browser timecontrol set -lock 0
+
+#
+# Waveform windows
+#
+if {[catch {window new WaveWindow -name "Waveform 4" -geometry 960x1101+2879+27}] != ""} {
+    window geometry "Waveform 4" 960x1101+2879+27
+}
+window target "Waveform 4" on
+waveform using {Waveform 4}
+waveform sidebar visibility partial
+waveform set \
+    -primarycursor TimeA \
+    -signalnames name \
+    -signalwidth 175 \
+    -units ns \
+    -valuewidth 95
+waveform baseline set -time 0
+
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.clk}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.res_n}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.freeMeUp_ii2rob[5:0]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #00ffff
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.valid_ii2rob}]}
+	} ]]
+waveform format $id -color #00ffff
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.wptr[5:0]}]}
+	} ]]
+waveform format $id -color #ff0099
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.rptr[5:0]}]}
+	} ]]
+waveform format $id -color #ff0099
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.readyToCommit[0]}]}
+	} ]]
+waveform format $id -color #ff00ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.freeMeUpTags[0]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff00ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.results[0]}]}
+	} ]]
+waveform format $id -color #ff00ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.destinationRegs[0]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff00ff
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.readyToCommit[1]}]}
+	} ]]
+waveform format $id -color #ff00ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.freeMeUpTags[1]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff00ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.results[1]}]}
+	} ]]
+waveform format $id -color #ff00ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.destinationRegs[1]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff00ff
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.readyToCommit[2]}]}
+	} ]]
+waveform format $id -color #ff00ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.freeMeUpTags[2]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff00ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.results[2]}]}
+	} ]]
+waveform format $id -color #ff00ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.destinationRegs[2]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff00ff
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.full_rob2ii}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.rd_ls2rob[5:0]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #00ff99
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.result_ls2rob[63:0]}]}
+	} ]]
+waveform format $id -color #00ff99
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.store_ls2rob}]}
+	} ]]
+waveform format $id -color #00ff99
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.tag_ls2rob[5:0]}]}
+	} ]]
+waveform format $id -color #00ff99
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.valid_ls2rob}]}
+	} ]]
+waveform format $id -color #00ff99
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.rd_int2rob[5:0]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #9900ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.result_int2rob[63:0]}]}
+	} ]]
+waveform format $id -color #9900ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.tag_int2rob[5:0]}]}
+	} ]]
+waveform format $id -color #9900ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.valid_int2rob}]}
+	} ]]
+waveform format $id -color #9900ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.value_rob2rf[63:0]}]}
+	} ]]
+waveform format $id -radix %d -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.write_en}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {rob_tb.rob_I.write_select[5:0]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff9900
+
+waveform xview limits 0 440ns
+
+#
+# Waveform Window Links
+#
+
+#
+# Console windows
+#
+console set -windowname Console
+window geometry Console 730x250+3067+88
+
+#
+# Layout selection
+#
+

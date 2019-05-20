@@ -1,0 +1,1034 @@
+# SimVision Command Script (Mo Mai 20 14:46:40 CEST 2019)
+#
+# Version 15.20.s045
+#
+# You can restore this configuration with:
+#
+#      irun -access +rwc -sv -linedebug -timescale 1ns/1ns -f module_list.f -svseed random -s -input /home/amatthes/Documents/BachelorThesis/Code/testbenches_v.3.0/TOP.tcl
+#
+
+
+#
+# Preferences
+#
+preferences set toolbar-Standard-WatchWindow {
+  usual
+  shown 0
+}
+preferences set toolbar-SimControl-WatchList {
+  usual
+  position -anchor e
+}
+preferences set txe-locate-add-fibers 1
+preferences set signal-type-colors {assertion #FF0000 output #FFA500 group #0099FF inout #00FFFF input #FFFF00 fiber #00EEEE errorsignal #FF0000 unknown #FFFFFF overlay #0099FF internal #00FF00 reference #FFFFFF}
+preferences set txe-navigate-search-locate 0
+preferences set txe-view-hold 0
+preferences set plugin-enable-svdatabrowser-new 1
+preferences set toolbar-SimControl-WaveWindow {
+  usual
+  position -anchor e
+}
+preferences set cursorctl-dont-show-sync-warning 1
+preferences set toolbar-CursorControl-WaveWindow {
+  usual
+  shown 0
+}
+preferences set toolbar-Windows-WatchWindow {
+  usual
+  shown 0
+}
+preferences set verilog-colors {Su #ff0099 0 {} 1 {} HiZ #ff9900 We #00ffff Pu #9900ff Sm #00ff99 X #ff0000 StrX #ff0000 other #ffff00 Z #ff9900 Me #0000ff La #ff00ff St {}}
+preferences set toolbar-sendToIndago-WaveWindow {
+  usual
+  shown 0
+  position -pos 1
+}
+preferences set txe-navigate-waveform-locate 1
+preferences set txe-view-hidden 0
+preferences set toolbar-TimeSearch-WaveWindow {
+  usual
+  shown 0
+}
+preferences set waveform-print-paper {A4 (210mm x 297mm)}
+preferences set toolbar-Standard-Console {
+  usual
+  position -pos 1
+}
+preferences set txe-search-show-linenumbers 1
+preferences set toolbar-Search-Console {
+  usual
+  position -pos 2
+}
+preferences set toolbar-NavSignalList-WaveWindow {
+  usual
+  shown 0
+}
+preferences set toolbar-txe_waveform_toggle-WaveWindow {
+  usual
+  shown 0
+}
+preferences set waveform-banding 0
+preferences set plugin-enable-groupscope 0
+preferences set key-bindings {Edit>Undo Ctrl+z PageUp PageUp View>Zoom>Next {Alt+Right arrow} View>Zoom>In Alt+i PageDown PageDown Edit>Copy Ctrl+c ScrollDown {Down arrow} Edit>Create>Group Ctrl+g View>Zoom>FullY_widget y Simulation>NextInScope F7 Edit>Select>All Ctrl+a Format>Radix>Decimal Ctrl+Shift+D Edit>Ungroup Ctrl+Shift+G TopOfPage Home Edit>Create>Condition Ctrl+e {command -console SimVision {%w sidebar access designbrowser selectall}} Alt+a ScrollLeft {Left arrow} Edit>SelectAllText Alt+a Edit>TextSearchConsole Alt+s View>Zoom>FullX_widget = Windows>SendTo>Waveform Ctrl+w Simulation>Return Shift+F5 View>CallstackDown {Ctrl+Down arrow} Select>All Ctrl+a Edit>Delete Del Format>Radix>Octal Ctrl+Shift+O Edit>Cut Ctrl+x Simulation>Run F2 Edit>Create>Marker Ctrl+m View>Center Alt+c View>CallstackInWindow Ctrl+k Edit>SelectAll Ctrl+a File>OpenDatabase Ctrl+o Edit>Redo Ctrl+y Format>Radix>Binary Ctrl+Shift+B View>ExpandSequenceTime>AtCursor Alt+x ScrollUp {Up arrow} File>CloseWindow Ctrl+Shift+w ScrollRight {Right arrow} View>Zoom>FullX Alt+= Edit>Create>Bus Ctrl+b Explore>NextEdge Ctrl+\] View>Zoom>Cursor-Baseline Alt+z View>Zoom>OutX Alt+o Edit>GoToLine Ctrl+g View>Zoom>Fit Alt+= View>Zoom>OutX_widget o View>CallstackUp {Ctrl+Up arrow} View>Bookmarks>Add Ctrl+b View>ShowValues Ctrl+s Simulation>Next F6 Edit>Search Ctrl+f Format>Radix>Hexadecimal Ctrl+Shift+H Edit>Create>MarkerAtCursor Ctrl+Shift+M View>Zoom>InX Alt+i View>Zoom>Out Alt+o Edit>TextSearch Ctrl+f View>Zoom>Previous {Alt+Left arrow} Edit>Paste Ctrl+v Format>Signed Ctrl+Shift+S Control>ReinvokeSimulator Ctrl+r View>CollapseSequenceTime>AtCursor Alt+s View>Zoom>InX_widget i Format>Radix>ASCII Ctrl+Shift+A Simulation>Step F5 Explore>PreviousEdge {Ctrl+[} BottomOfPage End}
+preferences set plugin-enable-interleaveandcompare 0
+preferences set plugin-enable-waveformfrequencyplot 0
+preferences set toolbar-SimControl-WatchWindow {
+  usual
+  shown 0
+}
+preferences set waveform-print-colors {Color on white}
+preferences set toolbar-Windows-WaveWindow {
+  usual
+  shown 0
+}
+preferences set prompt-on-reinvoke 0
+preferences set txe-navigate-waveform-next-child 1
+preferences set toolbar-Windows-WatchList {
+  usual
+  position -pos 2
+}
+preferences set toolbar-WaveZoom-WaveWindow {
+  usual
+  position -row 0
+}
+preferences set vhdl-colors {H #00ffff L #00ffff 0 {} X #ff0000 - {} 1 {} U #9900ff Z #ff9900 W #ff0000}
+preferences set txe-locate-scroll-x 1
+preferences set txe-locate-scroll-y 1
+preferences set txe-locate-pop-waveform 1
+preferences set whats-new-dont-show-at-startup 1
+preferences set toolbar-TimeSearch-WatchWindow {
+  usual
+  shown 0
+}
+
+#
+# Simulator
+#
+database require simulator -hints {
+	simulator "irun -access +rwc -gui -sv -linedebug -timescale 1ns/1ns -f module_list.f -svseed random -s -input TOP.tcl"
+}
+#
+# Groups
+#
+catch {group new -name {Group 1} -overlay 0}
+catch {group new -name {II and RAT} -overlay 0}
+catch {group new -name ROB -overlay 0}
+catch {group new -name RF -overlay 0}
+catch {group new -name {RS INT} -overlay 0}
+catch {group new -name RAT -overlay 0}
+catch {group new -name FREE -overlay 0}
+group using {Group 1}
+group set -overlay 0
+group set -comment {}
+group clear 0 end
+
+group using {II and RAT}
+group set -overlay 0
+group set -comment {}
+group clear 0 end
+
+group using ROB
+group set -overlay 0
+group set -comment {}
+group clear 0 end
+
+group using RF
+group set -overlay 0
+group set -comment {}
+group clear 0 end
+
+group using {RS INT}
+group set -overlay 0
+group set -comment {}
+group clear 0 end
+
+group using RAT
+group set -overlay 0
+group set -comment {}
+group clear 0 end
+
+group using FREE
+group set -overlay 0
+group set -comment {}
+group clear 0 end
+
+
+#
+# Mnemonic Maps
+#
+mmap new -reuse -name {Boolean as Logic} -radix %b -contents {{%c=FALSE -edgepriority 1 -shape low}
+{%c=TRUE -edgepriority 1 -shape high}}
+mmap new -reuse -name OPCODE -radix %x -contents {{%b=0000011 -label LD}
+{%b=0100011 -label SD}
+{%b=0110011 -label ADD}
+{%b=0000000 -label NONE}}
+mmap new -reuse -name {Physical Register} -radix %x -contents {{%b=????? -label {P %x}}}
+mmap new -reuse -name {Arch Register} -radix %x -contents {{%b=????? -label {R %x}}}
+mmap new -reuse -name BUSY -radix %b -contents {{%b=1 -edgepriority 1 -label BUSY -shape low}
+{%b=0 -edgepriority 1 -label FREE -shape high}}
+mmap new -reuse -name FREE -radix %b -contents {{%b=0 -edgepriority 1 -label BUSY -shape low}
+{%b=1 -edgepriority 1 -label FREE -shape high}}
+mmap new -reuse -name Reset_n -radix %x -contents {{%x=0 -label RESET}}
+mmap new -reuse -name FULL -radix %x -contents {{%x=1 -label FULL}}
+mmap new -reuse -name STOP -radix %x -contents {{%x=1 -label STOP}}
+mmap new -reuse -name VALID -radix %b -contents {{%b=1 -edgepriority 1 -label VALID -shape low}
+{%b=0 -edgepriority 1 -label INVALID -shape high}}
+mmap new -reuse -name {New map} -radix %x
+mmap new -reuse -name {New map #2} -radix %x
+mmap new -reuse -name {New map #3} -radix %x
+mmap new -reuse -name {New map #4} -radix %x
+mmap new -reuse -name {New map #5} -radix %x
+
+#
+# Time Ranges
+#
+timerange new -name {0 : 400ns} -start 0 -end 400ns
+
+#
+# Design Browser windows
+#
+if {[catch {window new WatchList -name "Design Browser 1" -geometry 962x500+803+427}] != ""} {
+    window geometry "Design Browser 1" 962x500+803+427
+}
+browser using {Design Browser 1}
+browser set -scope [subst  {simulator::[format {top.rob_I}]} ]
+browser set \
+    -signalsort name
+browser yview see [subst  {simulator::[format {top.rob_I}]} ]
+browser timecontrol set -lock 0
+
+if {[catch {window new WatchList -name "Design Browser 4" -geometry 875x809+1125+211}] != ""} {
+    window geometry "Design Browser 4" 875x809+1125+211
+}
+window target "Design Browser 4" on
+browser using {Design Browser 4}
+browser set -scope [subst  {simulator::[format {top}]} ]
+browser set \
+    -signalfilter free \
+    -signalsort name
+browser yview see [subst  {simulator::[format {top}]} ]
+browser timecontrol set -lock 0
+
+#
+# Waveform windows
+#
+if {[catch {window new WaveWindow -name "Waveform 4" -geometry 1920x1163+-1+-1}] != ""} {
+    window geometry "Waveform 4" 1920x1163+-1+-1
+}
+window target "Waveform 4" on
+waveform using {Waveform 4}
+waveform sidebar visibility none
+waveform set \
+    -primarycursor TimeA \
+    -signalnames name \
+    -signalwidth 271 \
+    -units ns \
+    -valuewidth 75
+waveform baseline set -time 0
+
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.ls_unit_I.clk}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.ls_unit_I.res_n}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.valid_int}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.opcode_int[6:0]}]}
+	} ]]
+waveform format $id -radix OPCODE
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rd_int[4:0]}]}
+	} ]]
+waveform format $id -radix {Arch Register}
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs1_int[4:0]}]}
+	} ]]
+waveform format $id -radix {Arch Register}
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs2_int[4:0]}]}
+	} ]]
+waveform format $id -radix {Arch Register}
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.valid_ls}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.opcode_ls[6:0]}]}
+	} ]]
+waveform format $id -radix OPCODE
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rd_ls[4:0]}]}
+	} ]]
+waveform format $id -radix {Arch Register}
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs1_ls[4:0]}]}
+	} ]]
+waveform format $id -radix {Arch Register}
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs2_ls[4:0]}]}
+	} ]]
+waveform format $id -radix {Arch Register}
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rat_I.rat[0]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff00ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rat_I.rat[1]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff00ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rat_I.rat[2]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff00ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rat_I.rat[3]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff00ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rat_I.rat[4]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff00ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rat_I.freeRegister_0[5:0]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff00ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rat_I.freeRegister_1[5:0]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff00ff
+set id [waveform add -cdivider divider]
+set id [waveform add -label {ROB see wvefrm wndw 2} -comment {}]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.rptr[5:0]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.wptr[5:0]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -cdivider divider]
+set id [waveform add -label COMMIT -comment {}]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.write_en_0_rob2rf}]}
+	} ]]
+waveform format $id -color #9900ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.write_select_0_rob2rf[5:0]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #9900ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.value_0_rob2rf[63:0]}]}
+	} ]]
+waveform format $id -color #9900ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.freeMeUp_0_rob2rat[5:0]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #9900ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.write_en_1_rob2rf}]}
+	} ]]
+waveform format $id -color #9900ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.write_select_1_rob2rf[5:0]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #9900ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.value_1_rob2rf[63:0]}]}
+	} ]]
+waveform format $id -color #9900ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.freeMeUp_1_rob2rat[5:0]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #9900ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.valid_rob2rat}]}
+	} ]]
+waveform format $id -color #9900ff
+set id [waveform add -cdivider divider]
+set id [waveform add -label RF -comment {}]
+waveform format $id -bgcolor #0099ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rf_I.rf[0]}]}
+	} ]]
+waveform format $id -radix %x -color #0099ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rf_I.valid[0]}]}
+	} ]]
+waveform format $id -radix VALID -color #0099ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rf_I.rf[1]}]}
+	} ]]
+waveform format $id -radix %x -color #0099ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rf_I.valid[1]}]}
+	} ]]
+waveform format $id -radix VALID -color #0099ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rf_I.rf[2]}]}
+	} ]]
+waveform format $id -radix %x -color #0099ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rf_I.valid[2]}]}
+	} ]]
+waveform format $id -radix VALID -color #0099ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rf_I.rf[3]}]}
+	} ]]
+waveform format $id -radix %x -color #0099ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rf_I.valid[3]}]}
+	} ]]
+waveform format $id -radix VALID -color #0099ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rf_I.rf[4]}]}
+	} ]]
+waveform format $id -radix %x -color #0099ff
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rf_I.valid[4]}]}
+	} ]]
+waveform format $id -radix VALID -color #0099ff
+set id [waveform add -cdivider divider]
+set id [waveform add -label INT -comment {}]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.integer_unit_I.valid_in}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.integer_unit_I.a_in[63:0]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.integer_unit_I.b_in[63:0]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.integer_unit_I.rd_in[5:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.integer_unit_I.opcode_in[6:0]}]}
+	} ]]
+waveform format $id -radix OPCODE
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.integer_unit_I.tag_in[5:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.integer_unit_I.valid_int2rob}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.integer_unit_I.rd_int2rob[5:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.integer_unit_I.tag_int2rob[5:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.integer_unit_I.stop_int2rsint}]}
+	} ]]
+set id [waveform add -cdivider divider]
+set id [waveform add -label LS -comment {}]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.ls_unit_I.clk}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.ls_unit_I.counter[3:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.ls_unit_I.stop_ls2rsls}]}
+	} ]]
+waveform format $id -radix STOP
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.ls_unit_I.valid_ls2rob}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.ls_unit_I.tag_rs2ls[5:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.ls_unit_I.imm_rs2ls[11:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.ls_unit_I.rs1_rs2ls[63:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.ls_unit_I.rs2_rs2ls[63:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.ls_unit_I.rd_rs2ls[5:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.ls_unit_I.store_ls2rob}]}
+	} ]]
+
+waveform xview limits 0 470ns
+waveform grid -state x -start 10ns -delta 20ns
+
+if {[catch {window new WaveWindow -name "Waveform 2" -geometry 1920x1101+1919+27}] != ""} {
+    window geometry "Waveform 2" 1920x1101+1919+27
+}
+waveform using {Waveform 2}
+waveform sidebar visibility none
+waveform set \
+    -primarycursor TimeA \
+    -signalnames name \
+    -signalwidth 175 \
+    -units ns \
+    -valuewidth 190
+waveform baseline set -time 0
+
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.rptr[5:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.wptr[5:0]}]}
+	} ]]
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.busy[0]}]}
+	} ]]
+waveform format $id -radix BUSY -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.opcodes[0]}]}
+	} ]]
+waveform format $id -radix OPCODE -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.results[0]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.destinationRegs[0]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.freeMeUpTags[0]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.readyToCommit[0]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.busy[1]}]}
+	} ]]
+waveform format $id -radix BUSY -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.opcodes[1]}]}
+	} ]]
+waveform format $id -radix OPCODE -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.results[1]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.destinationRegs[1]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.freeMeUpTags[1]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.readyToCommit[1]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.busy[2]}]}
+	} ]]
+waveform format $id -radix BUSY -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.opcodes[2]}]}
+	} ]]
+waveform format $id -radix OPCODE -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.results[2]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.destinationRegs[2]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.freeMeUpTags[2]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.readyToCommit[2]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.busy[3]}]}
+	} ]]
+waveform format $id -radix BUSY -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.opcodes[3]}]}
+	} ]]
+waveform format $id -radix OPCODE -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.results[3]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.destinationRegs[3]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.freeMeUpTags[3]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.readyToCommit[3]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.busy[4]}]}
+	} ]]
+waveform format $id -radix BUSY -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.opcodes[4]}]}
+	} ]]
+waveform format $id -radix OPCODE -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.results[4]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.destinationRegs[4]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.freeMeUpTags[4]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.readyToCommit[4]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.busy[5]}]}
+	} ]]
+waveform format $id -radix BUSY -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.opcodes[5]}]}
+	} ]]
+waveform format $id -radix OPCODE -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.results[5]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.destinationRegs[5]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.freeMeUpTags[5]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.readyToCommit[5]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.busy[6]}]}
+	} ]]
+waveform format $id -radix BUSY -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.opcodes[6]}]}
+	} ]]
+waveform format $id -radix OPCODE -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.results[6]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.destinationRegs[6]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.freeMeUpTags[6]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.readyToCommit[6]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.busy[7]}]}
+	} ]]
+waveform format $id -radix BUSY -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.opcodes[7]}]}
+	} ]]
+waveform format $id -radix OPCODE -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.results[7]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.destinationRegs[7]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.freeMeUpTags[7]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.readyToCommit[7]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.busy[8]}]}
+	} ]]
+waveform format $id -radix BUSY -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.opcodes[8]}]}
+	} ]]
+waveform format $id -radix OPCODE -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.results[8]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.destinationRegs[8]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.freeMeUpTags[8]}]}
+	} ]]
+waveform format $id -radix {Physical Register} -color #ff9900
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rob_I.readyToCommit[8]}]}
+	} ]]
+waveform format $id -color #ff9900
+
+waveform xview limits 0 470ns
+waveform grid -state x -start 10ns -delta 20ns
+
+if {[catch {window new WaveWindow -name "Waveform 5" -geometry 960x1163+-1+-1}] != ""} {
+    window geometry "Waveform 5" 960x1163+-1+-1
+}
+waveform using {Waveform 5}
+waveform sidebar visibility none
+waveform set \
+    -primarycursor TimeA \
+    -signalnames name \
+    -signalwidth 178 \
+    -units ns \
+    -valuewidth 75
+waveform baseline set -time 0
+
+set id [waveform add -label {RS INT} -comment {}]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.clk}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.full_rs2id}]}
+	} ]]
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.free[0]}]}
+	} ]]
+waveform format $id -radix FREE
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.ready[0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.opcode[0]}]}
+	} ]]
+waveform format $id -radix OPCODE
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.tag[0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs1_address[0]}]}
+	} ]]
+waveform format $id -radix {Physical Register}
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs1_content[0]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs1_valid[0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs2_address[0]}]}
+	} ]]
+waveform format $id -radix {Physical Register}
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs2_content[0]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs2_valid[0]}]}
+	} ]]
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.free[1]}]}
+	} ]]
+waveform format $id -radix FREE
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.ready[1]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.opcode[1]}]}
+	} ]]
+waveform format $id -radix OPCODE
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.tag[1]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs1_address[1]}]}
+	} ]]
+waveform format $id -radix {Physical Register}
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs1_content[1]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs1_valid[1]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs2_address[1]}]}
+	} ]]
+waveform format $id -radix {Physical Register}
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs2_content[1]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs2_valid[1]}]}
+	} ]]
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.free[2]}]}
+	} ]]
+waveform format $id -radix FREE
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.ready[2]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.opcode[2]}]}
+	} ]]
+waveform format $id -radix OPCODE
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.tag[2]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs1_address[2]}]}
+	} ]]
+waveform format $id -radix {Physical Register}
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs1_content[2]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs1_valid[2]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs2_address[2]}]}
+	} ]]
+waveform format $id -radix {Physical Register}
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs2_content[2]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs2_valid[2]}]}
+	} ]]
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.free[3]}]}
+	} ]]
+waveform format $id -radix FREE
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.ready[3]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.opcode[3]}]}
+	} ]]
+waveform format $id -radix OPCODE
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.tag[3]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs1_address[3]}]}
+	} ]]
+waveform format $id -radix {Physical Register}
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs1_content[3]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs1_valid[3]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs2_address[3]}]}
+	} ]]
+waveform format $id -radix {Physical Register}
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs2_content[3]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_int_I.rs2_valid[3]}]}
+	} ]]
+
+waveform xview limits 0 470ns
+waveform grid -state x -start 10ns -delta 20ns
+
+if {[catch {window new WaveWindow -name "Waveform 6" -geometry 950x1162+950+-8}] != ""} {
+    window geometry "Waveform 6" 950x1162+950+-8
+}
+waveform using {Waveform 6}
+waveform sidebar visibility none
+waveform set \
+    -primarycursor TimeA \
+    -signalnames name \
+    -signalwidth 175 \
+    -units ns \
+    -valuewidth 75
+waveform baseline set -time 0
+
+set id [waveform add -label {RS LS} -comment {}]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.clk}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.full_rs2id}]}
+	} ]]
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.free[0]}]}
+	} ]]
+waveform format $id -radix FREE
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.opcode[0]}]}
+	} ]]
+waveform format $id -radix OPCODE
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.tag[0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.rs1_address[0]}]}
+	} ]]
+waveform format $id -radix {Physical Register}
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.rs1_content[0]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.rs2_address[0]}]}
+	} ]]
+waveform format $id -radix {Physical Register}
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.rs2_content[0]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.free[1]}]}
+	} ]]
+waveform format $id -radix FREE
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.opcode[1]}]}
+	} ]]
+waveform format $id -radix OPCODE
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.tag[1]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.rs1_address[1]}]}
+	} ]]
+waveform format $id -radix {Physical Register}
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.rs1_content[1]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.rs2_address[1]}]}
+	} ]]
+waveform format $id -radix {Physical Register}
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.rs2_content[1]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.free[2]}]}
+	} ]]
+waveform format $id -radix FREE
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.opcode[2]}]}
+	} ]]
+waveform format $id -radix OPCODE
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.tag[2]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.rs1_address[2]}]}
+	} ]]
+waveform format $id -radix {Physical Register}
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.rs1_content[2]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.rs2_address[2]}]}
+	} ]]
+waveform format $id -radix {Physical Register}
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.rs2_content[2]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.free[3]}]}
+	} ]]
+waveform format $id -radix FREE
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.opcode[3]}]}
+	} ]]
+waveform format $id -radix OPCODE
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.tag[3]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.rs1_address[3]}]}
+	} ]]
+waveform format $id -radix {Physical Register}
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.rs1_content[3]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.rs2_address[3]}]}
+	} ]]
+waveform format $id -radix {Physical Register}
+set id [waveform add -signals [subst  {
+	{simulator::[format {top.rs_ls_I.rs2_content[3]}]}
+	} ]]
+waveform format $id -radix %d
+
+waveform xview limits 0 470ns
+waveform grid -state x -start 10ns -delta 20ns
+
+#
+# Waveform Window Links
+#
+
+#
+# Console windows
+#
+console set -windowname Console
+window geometry Console 420x503+3245+177
+
+#
+# Layout selection
+#
+
