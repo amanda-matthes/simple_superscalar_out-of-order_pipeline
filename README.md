@@ -1,5 +1,5 @@
 # A SystemVerilog implementation of a superscalar and out-of-order instruction pipeline
-A superscalar and out-of-order instruction pipeline loosely based on the RISC-V ISA implemented in SystemVerilog.  
+A superscalar and out-of-order instruction pipeline loosely based on the RISC-V ISA implemented in SystemVerilog. This project was part of my BSc thesis. 
 
 ## Abstract
 Superscalar out-of-order execution has become the norm in modern processors. Yet there is little information in the literature about its implementation details. This thesis explores what new hardware structures superscalar out-of-order execution requires. It presents a design for a simple processor, implemented in SystemVerilog, that uses register renaming, reservation stations and a reorder buffer to dynamically schedule instructions.  
